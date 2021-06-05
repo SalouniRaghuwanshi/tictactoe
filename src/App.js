@@ -1,9 +1,10 @@
 import React from "react";
+import Board from "./components/Board";
 
 app = () => (
-  <>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal.</p>
-  </>
+  <div>
+    <h1>TIC TAC TOE</h1>
+    <Board/>
+  </div>
 );
 export default app
