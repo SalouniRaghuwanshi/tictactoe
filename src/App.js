@@ -4,31 +4,34 @@ import { calculateWinner } from "./helpers";
 import "./style/root.scss";
 
 app = () => {
-  const [board, setboard]=useState(Array(9).fill(null));
-    const [isXnext, setisXnext]=useState(false);
-    const winner=calculateWinner(board);
-    const message =winner ?`winner is ${winner}`:`next player is ${isXnext ?'x' :'0'}`;
-    console.log(winner);
+  const [history, sethistory]=useState([
+    {board:(Array(9).fill(null)), isXnext: true},
+  ]);
+  const [currentMove, setcurrentMove]=useState(0);
+  const current=history[currentMove];
+    const winner=calculateWinner(current.board);
+    const message =winner ?`winner is ${winner}`:`next player is ${current.isXnext ?'x' :'0'}`;
     const HandelSquareClick=(position)=>{
-        if (board[position] ||winner){
-            return;}
-
-            
-        setboard(prev=>{
-            return prev.map((square, pos)=>{
+        if (current.board[position] ||winner){
+            return;}          
+        sethistory(prev=>{
+          const last=prev[prev.length-1];
+            const newBoard= last.board.map((square, pos)=>{
                 if(pos===position){
-                    return isXnext ? 'X': "0";
+                    return last.isXnext ? 'X': "0";
                 }
                 return square;
-            })
-        })
-        setisXnext (prev=>!prev)
-      }
+            });
+          
+            return prev.concat({board: newBoard, isXnext: !last.isXnext});
+        });
+        setcurrentMove(prev=> prev +1);
+      };
     return(
   <div className="app">
     <h1>TIC TAC TOE</h1>
     <h2>{message}</h2>
-    <Board board={board} HandelSquareClick={HandelSquareClick}/>
+    <Board board={current.board} HandelSquareClick={HandelSquareClick}/>
   </div>
 );
     
