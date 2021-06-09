@@ -11,4 +11,4 @@ const StatusMessage = ({winner, current}) => {
     )
 }
 
-export default StatusMessage
+export default StatusMessage;
