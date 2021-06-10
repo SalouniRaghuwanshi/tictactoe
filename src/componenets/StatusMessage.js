@@ -10,12 +10,19 @@ const StatusMessage = ({winner, current}) => {
             {!winner && !noMoveLeft &&
             (
             <>
-            next player is{" "}<span className={winner==='current.isXnext'?'text-green': 'text-orange'}>
+            next player is{" "}<span className={current.isXnext?'text-green': 'text-orange'}>
                 {current.isXnext ?'x' :'0'}{" "}</span>
             </>
             )
             }
-            {!winner && noMoveLeft &&`X and 0 is tied`}
+            {!winner && noMoveLeft &&
+            (
+                <>
+                <span className="text-green">X</span>{" "}and{" "}
+                <span className="text-orange">0</span>{" "}tied
+                </>
+            )
+            }
         </div>
     )
 }
