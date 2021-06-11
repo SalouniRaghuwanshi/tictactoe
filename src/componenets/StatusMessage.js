@@ -1,7 +1,7 @@
 import React from 'react'
 
 const StatusMessage = ({winner, current}) => {
-   const noMoveLeft=current.board.every(el=>el!=null);
+   const noMoveLeft=current.board.every(el=>el!==null);
     return (
         <div className="status-message">
             {winner && (<>
